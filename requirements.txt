@@ -1,0 +1,6 @@
+agno[weaviate]
+weaviate-client>=4.0.0
+olostep>=1.0.0
+streamlit>=1.35.0
+openai
+python-dotenv
