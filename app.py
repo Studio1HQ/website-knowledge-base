@@ -118,24 +118,20 @@ st.markdown(
 )
 
 # ── Header ──────────────────────────────────────────────────────────────────
-col_l, col_c, col_r = st.columns([1, 3, 1])
-with col_c:
-    st.markdown(
-        """
-<div style="text-align:center; padding: 20px 0 10px 0;">
-  <h1 style="font-size:2rem; font-weight:700; color:#FFFFFF; letter-spacing:-0.5px; margin:0 0 6px 0; display:flex; align-items:center; justify-content:center; gap:12px;">
-    Weaviate × Agno Knowledge Base
-    <img src="https://weaviate.io/img/site/weaviate-logo-light.png" height="30" alt="Weaviate"/>
+st.markdown(
+    """
+<div style="text-align:center; padding: 36px 0 28px 0; border-bottom: 1px solid #1E2A45; margin-bottom: 28px;">
+  <h1 style="font-size:2.4rem; font-weight:800; color:#FFFFFF; margin:0; letter-spacing:-0.5px; line-height:1.3;">
+    Searchable Knowledge Base with<br/>
+    <span style="display:inline-flex; align-items:center; justify-content:center; gap:12px; margin-top:6px;">
+      <img src="https://weaviate.io/img/site/weaviate-logo-light.png" height="38" alt="Weaviate" style="vertical-align:middle;"/>
+      Weaviate and Agno
+    </span>
   </h1>
-  <p style="color:#6B7FA3; margin:0; font-size:0.95rem;">
-    Crawl any website · Store in Weaviate · Ask with Agno
-  </p>
 </div>
 """,
-        unsafe_allow_html=True,
-    )
-
-st.markdown("<hr style='border-color:#1E2A45; margin:0 0 20px 0;'>", unsafe_allow_html=True)
+    unsafe_allow_html=True,
+)
 
 # ── Session state ────────────────────────────────────────────────────────────
 if "ingested" not in st.session_state:
@@ -262,9 +258,6 @@ else:
             try:
                 import time
 
-                agent = _get_agent()
-                run_response = agent.run(prompt, stream=True)
-
                 def _show_status(msg: str) -> None:
                     status_placeholder.markdown(
                         f"<span style='color:#6B7FA3; font-size:0.85rem;'>{msg}</span>",
@@ -273,6 +266,9 @@ else:
 
                 _show_status("⏳ Thinking...")
                 start = time.time()
+
+                agent = _get_agent()
+                run_response = agent.run(prompt, stream=True)
 
                 for chunk in run_response:
                     elapsed = time.time() - start
