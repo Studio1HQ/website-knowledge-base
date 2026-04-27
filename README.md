@@ -16,7 +16,7 @@ User URL
                      ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  Weaviate  (store)                                          │
-│  Hybrid HNSW collection · text2vec-openai embeddings        │
+│  Hybrid HNSW collection · built-in vector embeddings        │
 └────────────────────┬────────────────────────────────────────┘
                      │  semantic / hybrid search
                      ▼
@@ -29,13 +29,25 @@ User URL
              Streamlit Chat UI
 ```
 
+## Ingestion pipeline
+
+How a URL becomes searchable content in Weaviate:
+
+![ingestion pipeline from URL input to Weaviate storage](./ingestion_pipeline.png)
+
+## Query pipeline
+
+Once the content is in Weaviate, this is what happens every time a user asks a question
+
+![how it works when a user asks a question](./content.png)
+
 ## Prerequisites
 
 - Python 3.11+
 - API keys for:
   - **Olostep** — [olostep.com/dashboard/api-keys](https://www.olostep.com/dashboard/api-keys)
   - **Weaviate Cloud** — [console.weaviate.cloud](https://console.weaviate.cloud) (free sandbox available)
-  - **OpenAI** — [platform.openai.com/api-keys](https://platform.openai.com/api-keys) (used for embeddings + GPT-5.2)
+  - **OpenAI** — [platform.openai.com/api-keys](https://platform.openai.com/api-keys) (used for the GPT-5.2 agent)
 
 ## Setup
 
@@ -75,10 +87,15 @@ streamlit run app.py
 
 ```
 website-knowledge-base/
-├── app.py          # Streamlit frontend (sidebar + chat UI)
-├── agent.py        # Agno agent wired to the Weaviate knowledge base
-├── ingest.py       # Olostep crawl → Weaviate ingestion pipeline
-├── config.py       # Environment variables and shared constants
+├── app.py              # Streamlit frontend (sidebar + chat UI)
+├── agent.py            # Agno agent wired to the Weaviate knowledge base
+├── ingest.py           # Olostep crawl → Weaviate ingestion pipeline
+├── config.py           # Environment variables and shared constants
 ├── requirements.txt
-└── .env.example
+├── skills-lock.json    # Claude Code skills (Weaviate)
+├── .env.example
+└── .claude/
+    └── skills/
+        └── olostep/
+            └── SKILL.md    # Claude Code skill: Olostep SDK patterns
 ```

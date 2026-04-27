@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "weaviate": {
+      "source": "weaviate/agent-skills",
+      "sourceType": "github",
+      "computedHash": "949481a5c8431f1ea425909e58aa1aff8360526e88062339d25f3df1e777f89e"
+    },
+    "weaviate-cookbooks": {
+      "source": "weaviate/agent-skills",
+      "sourceType": "github",
+      "computedHash": "8e91545b5207088cc864ff9e80eab55db2e109dedd16a574765561d6435ef584"
+    }
+  }
+}
